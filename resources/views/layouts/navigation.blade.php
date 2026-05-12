@@ -109,6 +109,11 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @can('admin')
+            <x-responsive-nav-link :href="route('admin-panel')" :active="request()->routeIs('admin-panel')">
+                {{ __('Admin-panel') }}
+            </x-responsive-nav-link>
+            @endcan('admin')
         </div>
 
         <!-- Responsive Settings Options -->
