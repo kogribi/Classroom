@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClassroomController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,6 +12,11 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::get('/classes', [ClassroomController::class, 'index'])->middleware(['auth', 'verified'])->name('classes');
+Route::get('/classes/create', [ClassroomController::class, 'create'])->middleware(['auth', 'verified', 'can:teacher'])->name('create_class');
+Route::post('/classes', [ClassroomController::class, 'store'])->middleware(['auth', 'verified', 'can:teacher']);
 
 
 Route::get('/admin-panel', [AdminController::class, 'index'])->middleware(['auth', 'verified', 'can:admin'])->name('admin-panel');
