@@ -4,18 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
-class Classroom extends Model
+class Join extends Model
 {
     protected $fillable = [
     'user_id',
-    'name',
-    'code',
-    'description'
+    'class_id',
     ];
 
  public function joins()
 {
-    return $this->hasMany(Join::class);
+    return $this->belongsTo(Classroom::class);
 }
 }

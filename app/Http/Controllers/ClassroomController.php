@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classroom;
+use App\Models\Join;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -13,7 +14,11 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        return view('classroom.index');
+        $classes = Classroom::whereIn(
+            'id',
+            Join::where('user_id', auth()->id())->pluck('class_id')
+        )->get();
+        return view('classroom.index', compact("classes"));
     }
 
     /**
@@ -53,7 +58,7 @@ class ClassroomController extends Controller
      */
     public function show(Classroom $classroom)
     {
-        //
+        return view('classroom.show', compact("classroom"));
     }
 
     /**
