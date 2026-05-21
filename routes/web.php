@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeworkController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\JoinController;
@@ -18,8 +19,12 @@ Route::get('/dashboard', function () {
 Route::get('/classes', [ClassroomController::class, 'index'])->middleware(['auth', 'verified'])->name('classes');
 Route::get('/classes/create', [ClassroomController::class, 'create'])->middleware(['auth', 'verified', 'can:teacher'])->name('create_class');
 Route::get('/classes/{classroom}', [ClassroomController::class, 'show'])->middleware(['auth', 'verified'])->name('class');
-
 Route::post('/classes', [ClassroomController::class, 'store'])->middleware(['auth', 'verified', 'can:teacher']);
+
+Route::get('/homework', [HomeworkController::class, 'index'])->middleware(['auth', 'verified'])->name('homework');
+Route::get('/homework/create', [HomeworkController::class, 'create'])->middleware(['auth', 'verified', 'can:teacher'])->name('create_homework');
+Route::post('/homework', [HomeworkController::class, 'store'])->middleware(['auth', 'verified', 'can:teacher']);
+Route::get('/homework/{id}/download/{index}', [HomeworkController::class, 'download'])->middleware(['auth', 'verified']);
 
 
 Route::get('/admin-panel', [AdminController::class, 'index'])->middleware(['auth', 'verified', 'can:admin'])->name('admin-panel');

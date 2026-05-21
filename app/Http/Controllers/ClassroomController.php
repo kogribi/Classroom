@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classroom;
+use App\Models\Homework;
 use App\Models\Join;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -63,6 +64,9 @@ class ClassroomController extends Controller
      */
     public function show(Classroom $classroom)
     {
+
+        $classroom->load('homeworks');
+
         return view('classroom.show', compact("classroom"));
     }
 

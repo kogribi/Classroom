@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('class_id')->constrained(table: 'classrooms')->onDelete('cascade');
             $table->string('title');
             $table->string('description');
-            $table->string('file');
+            $table->json('file');
+            $table->json('file_names');
             $table->date('due_date')->nullable(); 
             $table->timestamps();
         });

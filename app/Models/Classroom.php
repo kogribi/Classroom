@@ -18,4 +18,8 @@ class Classroom extends Model
 {
     return $this->hasMany(Join::class);
 }
+public function homeworks()
+{
+    return $this->hasMany(Homework::class, 'class_id');
+}
 }
