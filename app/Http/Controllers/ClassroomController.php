@@ -44,11 +44,16 @@ class ClassroomController extends Controller
             $code = Str::upper(Str::random(8));
         } while (Classroom::where('code', $code)->exists());
 
-        Classroom::create([
+        $classroom = Classroom::create([
             "user_id" => $validated["user_id"],
             "name" => $validated["name"],
             "code" => $code,
             "description" => $validated["description"],
+          ]);
+        
+          Join::firstOrCreate([
+            "user_id" => $validated["user_id"],
+            "class_id" => $classroom->id,
           ]);
             return redirect("/classes");
     }
