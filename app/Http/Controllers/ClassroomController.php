@@ -66,6 +66,7 @@ class ClassroomController extends Controller
         return view('classroom.show', compact("classroom"));
     }
 
+
     /**
      * Show the form for editing the specified resource.
      */
